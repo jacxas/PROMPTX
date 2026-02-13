@@ -46,7 +46,7 @@ export default function CategorySelector({ selectedCategory, onSelectCategory }:
                     {category.prompts.length} estrategias
                   </span>
                   <span className={`px-2 py-1 rounded-full bg-gradient-to-r ${gradient} text-white font-semibold`}>
-                    {category.prompts[0]?.incomeGoal || 'Varios'}
+                    {category.prompts[0]?.revenueGoal || 'Varios'}
                   </span>
                 </div>
               </div>
