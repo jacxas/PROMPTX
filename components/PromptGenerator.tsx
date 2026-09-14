@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Prompt } from '@/data/prompts';
 import { generateMonetizationPrompt } from '@/lib/gemini';
 import { canGeneratePrompt, incrementPromptUsage, getUsageStats } from '@/lib/freemium';
+import { getCategoryName } from '@/lib/utils';
 
 interface PromptGeneratorProps {
   prompt: Prompt;
@@ -37,10 +38,10 @@ export default function PromptGenerator({ prompt, onClose }: PromptGeneratorProp
         },
         body: JSON.stringify({
           template: {
-            category: prompt.category,
+            category: getCategoryName(prompt.categoryId),
             title: prompt.title,
-            description: prompt.description,
-            incomeGoal: prompt.incomeGoal,
+            description: prompt.systemPrompt,
+            incomeGoal: prompt.revenueGoal,
             isPro: prompt.isPro,
           },
           userInput: userInput || undefined,
@@ -72,9 +73,9 @@ export default function PromptGenerator({ prompt, onClose }: PromptGeneratorProp
           <div className="flex justify-between items-start mb-4">
             <div>
               <h2 className="text-2xl font-bold text-gray-900">{prompt.title}</h2>
-              <p className="text-sm text-gray-600 mt-1">{prompt.category}</p>
+              <p className="text-sm text-gray-600 mt-1">{getCategoryName(prompt.categoryId)}</p>
               <p className="text-sm font-semibold text-green-600 mt-1">
-                Objetivo: {prompt.incomeGoal}
+                Objetivo: {prompt.revenueGoal}
               </p>
             </div>
             <button
@@ -87,7 +88,7 @@ export default function PromptGenerator({ prompt, onClose }: PromptGeneratorProp
             </button>
           </div>
 
-          <p className="text-gray-700 mb-6">{prompt.description}</p>
+          <p className="text-gray-700 mb-6">{prompt.systemPrompt}</p>
 
           {!result && (
             <div className="mb-6">

@@ -123,3 +123,20 @@ export function getCategoryIcon(category: string): string {
 
   return icons[category] || '💡';
 }
+
+/**
+ * Obtiene el nombre legible de una categoria a partir de su id
+ */
+export function getCategoryName(categoryId: string): string {
+  const names: Record<string, string> = {
+    'ai-automation': 'AI & Automatización',
+    'digital-products': 'Productos Digitales',
+    'ecommerce': 'E-commerce & Dropshipping',
+    'investment': 'Inversión & Trading',
+    'services': 'Servicios de Alto Valor',
+    'content': 'Contenido & Creadores',
+    'crypto': 'Crypto & DeFi',
+  };
+
+  return names[categoryId] || categoryId;
+}
